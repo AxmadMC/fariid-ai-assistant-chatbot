@@ -1,0 +1,459 @@
+<!-- ============ FARIID — PERSONAL AI ASSISTANT ============
+     Paste into an Elementor HTML widget in your footer once; it appears on every page.
+     Set apiUrl and siteKey below. -->
+<script data-no-optimize="1" data-no-defer="1" data-no-delay="1" data-cfasync="false">
+  window.FARIID_AI_CONFIG = {
+    title: 'Fariid - Personal AI Assistant',                                // shown in the chat header
+    name: 'Fariid',                                                         // shown under Fariid's messages
+    avatar: 'https://ahmedmc.com/wp-content/uploads/2025/05/Website-Favicon-Black-1.png', // Fariid's profile picture
+    greeting: "👋 Hi! I'm Ahmed MC's AI assistant. Need help finding something?", // pop-up bubble on first visit
+    privacyUrl: 'https://ahmedmc.com/privacy',                              // your Privacy Policy page
+    apiUrl: 'https://fariid-ai-assistant.YOUR-SUBDOMAIN.workers.dev',       // your Worker address (no / at the end)
+    siteKey: 'YOUR-TURNSTILE-SITE-KEY'                                      // Turnstile site key
+  };
+</script>
+
+<div class="fri-root" id="fariidAi">
+  <!-- Pop-up greeting -->
+  <div class="fri-nudge" id="faNudge" hidden>
+    <button type="button" class="fri-nudge-x" id="faNudgeX" aria-label="Dismiss">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <img class="fri-nudge-av fri-avatar-img" alt="" width="34" height="34">
+    <p id="faNudgeText"></p>
+  </div>
+
+  <!-- Launcher -->
+  <button type="button" class="fri-launch" id="faLaunch" aria-expanded="false" aria-controls="faPanel" aria-label="Chat with Fariid">
+    <img class="fri-launch-logo fri-avatar-img" alt="" width="46" height="46">
+    <svg class="fri-bot-icon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+      <path d="M16 4.5l2.3 6.6c.3.9 1 1.6 1.9 1.9l6.6 2.3-6.6 2.3c-.9.3-1.6 1-1.9 1.9L16 26.1l-2.3-6.6c-.3-.9-1-1.6-1.9-1.9L5.2 15.3l6.6-2.3c.9-.3 1.6-1 1.9-1.9z" fill="#fff"/>
+      <path d="M25 3.5l.8 2.1c.1.3.3.5.6.6l2.1.8-2.1.8c-.3.1-.5.3-.6.6L25 10.5l-.8-2.1a1 1 0 0 0-.6-.6l-2.1-.8 2.1-.8c.3-.1.5-.3.6-.6z" fill="#F2DC92"/>
+    </svg>
+    <svg class="fri-x-icon" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><path d="M7 7l10 10M17 7L7 17"/></svg>
+  </button>
+
+  <!-- Chat panel -->
+  <section class="fri-panel" id="faPanel" role="dialog" aria-label="Fariid, Personal AI Assistant" hidden>
+    <header class="fri-head">
+      <div class="fri-head-av"><img class="fri-avatar-img" alt="" width="48" height="48"></div>
+      <div class="fri-head-text">
+        <div class="fri-title-row"><strong id="faName">Fariid - Personal AI Assistant</strong><span class="fri-online" role="img" aria-label="Online" title="Online"></span></div>
+      </div>
+      <button type="button" class="fri-icon-btn" id="faClose" aria-label="Close chat">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </header>
+
+    <div class="fri-body" id="faBody" aria-live="polite"></div>
+
+    <div class="fri-verify" id="faVerify">
+      <div id="faTurnstile"></div>
+      <small id="faVerifyMsg">Quick check that you're human…</small>
+    </div>
+
+    <footer class="fri-foot">
+      <form class="fri-form" id="faForm">
+        <label for="faInput" class="fri-sr">Your question</label>
+        <textarea id="faInput" name="fariid-question" rows="1" maxlength="500" placeholder="Ask me anything about Ahmed…" disabled
+          autocomplete="off" data-lpignore="true" data-1p-ignore="true" data-bwignore="true" data-form-type="other" data-gramm="false" data-gramm_editor="false" data-enable-grammarly="false"></textarea>
+        <button type="submit" class="fri-send" id="faSend" aria-label="Send" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12l16-8-6 16-2.5-6.5z"/><path d="M11.5 13.5L20 4"/></svg>
+        </button>
+      </form>
+      <div class="fri-disclaimer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M12 9v4M12 16h.01"/></svg>
+        <p><strong>AI can make mistakes.</strong> For adults 18+. Your messages are processed by Google Gemini. Please don't share personal information. <a id="faPrivacy" href="https://ahmedmc.com/privacy" target="_blank" rel="noopener">Privacy Policy</a> applies.</p>
+      </div>
+    </footer>
+  </section>
+</div>
+
+<style>
+  .fri-root{pointer-events:none;--fri-p:#07A698;--fri-pd:#058F83;--fri-pl:#2FE3CE;--fri-tint:#E3F7F5;--fri-gold:#C9A227;--fri-ink:#0B0F14;--fri-text:#2B333B;--fri-muted:#68727C;--fri-border:#E3E3EC;
+    position:fixed;right:24px;bottom:24px;z-index:2147483000;font-family:Inter,system-ui,-apple-system,sans-serif;color:var(--fri-text);line-height:1.55;-webkit-font-smoothing:antialiased;}
+  .fri-root *{box-sizing:border-box;}
+  .fri-launch,.fri-panel,.fri-nudge{pointer-events:auto;}
+  .fri-root button{font-family:inherit;}
+  .fri-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);}
+  .fri-root [hidden]{display:none !important;}
+
+  /* ---------- Launcher ---------- */
+  .fri-launch{position:relative;display:flex;align-items:center;justify-content:center;margin-left:auto;cursor:pointer;
+    width:62px !important;height:62px !important;padding:0 !important;border:0 !important;border-radius:50% !important;
+    background:#fff !important;box-shadow:0 0 0 3px #07A698,0 16px 34px -12px rgba(7,166,152,.85),0 0 0 0 rgba(7,166,152,.45);
+    animation:faPop .55s cubic-bezier(.34,1.56,.64,1) .4s both, faPulse 2.6s ease-out 1.4s 3;transition:transform .2s ease;}
+  .fri-launch:hover{transform:scale(1.06) !important;}
+  .fri-launch:focus-visible{outline:3px solid var(--fri-pl);outline-offset:3px;}
+  .fri-launch-logo{width:54px;height:54px;border-radius:50%;object-fit:contain;transition:transform .25s ease,opacity .2s ease;}
+  .fri-launch:hover .fri-launch-logo{transform:scale(1.05);}
+  .fri-bot-icon{display:none;width:34px;height:34px;transition:transform .25s ease,opacity .2s ease;}
+  .fri-root.no-logo .fri-launch{background:linear-gradient(135deg,#0BB8A8,#058F83) !important;}
+  .fri-root.no-logo .fri-bot-icon{display:block;}
+  .fri-launch:hover .fri-bot-icon{transform:scale(1.06);}
+  .fri-spark{transform-origin:center;transform-box:fill-box;animation:faTwinkle 3.2s ease-in-out infinite;}
+  .fri-spark2{transform-origin:center;transform-box:fill-box;animation:faTwinkle 3.2s ease-in-out 1.1s infinite;}
+  .fri-x-icon{position:absolute;width:22px;height:22px;opacity:0;transform:rotate(-90deg);transition:opacity .2s ease,transform .25s ease;}
+  .fri-root.is-open .fri-bot-icon,.fri-root.is-open .fri-launch-logo{opacity:0;transform:scale(.6);}
+  .fri-root.is-open .fri-launch{width:52px !important;height:52px !important;margin-top:5px;background:#2E4352 !important;animation:none;
+    box-shadow:0 0 0 2px rgba(255,255,255,.9),0 12px 26px -10px rgba(11,15,20,.7) !important;}
+  .fri-root.is-open .fri-launch:hover{background:#07A698 !important;transform:none !important;}
+  .fri-root.is-open .fri-x-icon{opacity:1;transform:none;}
+  .fri-title-row{display:flex;align-items:center;gap:7px;min-width:0;}
+  .fri-title-row strong{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .fri-online{flex-shrink:0;width:10px;height:10px;border-radius:50%;background:#3DDC97;box-shadow:0 0 0 3px rgba(61,220,151,.25);animation:faLive 2.4s ease-in-out infinite;}
+  @keyframes faLive{0%,100%{box-shadow:0 0 0 3px rgba(61,220,151,.25);}50%{box-shadow:0 0 0 5px rgba(61,220,151,.08);}}
+  @keyframes faPop{from{transform:scale(0);}to{transform:scale(1);}}
+  @keyframes faPulse{0%{box-shadow:0 0 0 3px #07A698,0 16px 34px -12px rgba(7,166,152,.85),0 0 0 3px rgba(7,166,152,.45);}70%{box-shadow:0 0 0 3px #07A698,0 16px 34px -12px rgba(7,166,152,.85),0 0 0 18px rgba(7,166,152,0);}100%{box-shadow:0 0 0 3px #07A698,0 16px 34px -12px rgba(7,166,152,.85),0 0 0 3px rgba(7,166,152,0);}}
+  @keyframes faTwinkle{0%,100%{transform:scale(1) rotate(0);}50%{transform:scale(.78) rotate(45deg);}}
+
+  /* ---------- Pop-up greeting ---------- */
+  .fri-nudge{position:absolute;right:4px;bottom:78px;width:250px;display:flex;align-items:flex-start;gap:10px;padding:13px 14px;
+    background:#fff;border:1px solid var(--fri-border);border-radius:16px 16px 4px 16px;box-shadow:0 18px 40px -18px rgba(11,15,20,.45);
+    cursor:pointer;animation:faRise .45s cubic-bezier(.34,1.56,.64,1);}
+  .fri-nudge p{margin:0 !important;font-size:13.5px !important;line-height:1.45 !important;color:var(--fri-ink) !important;font-weight:500;padding-right:12px;}
+  .fri-nudge-av{width:34px;height:34px;border-radius:50%;flex-shrink:0;background:#fff;border:1.5px solid #D5E2E1;object-fit:contain;}
+  .fri-nudge-x{position:absolute;top:6px;right:6px;width:20px;height:20px;display:flex;align-items:center;justify-content:center;cursor:pointer;
+    padding:0 !important;border:0 !important;border-radius:50% !important;background:#F1F4F5 !important;color:var(--fri-muted) !important;}
+  .fri-nudge-x svg{width:11px;height:11px;}
+  @keyframes faRise{from{opacity:0;transform:translateY(10px) scale(.95);}to{opacity:1;transform:none;}}
+
+  /* ---------- Panel ---------- */
+  .fri-panel{position:absolute;right:0;bottom:78px;width:384px;height:min(620px,calc(100vh - 120px));display:flex;flex-direction:column;
+    background:#fff;border:1px solid var(--fri-border);border-radius:24px;overflow:hidden;box-shadow:0 34px 70px -28px rgba(11,15,20,.5);
+    transform-origin:bottom right;animation:faOpen .28s cubic-bezier(.2,.9,.3,1.2);}
+  @keyframes faOpen{from{opacity:0;transform:translateY(12px) scale(.96);}to{opacity:1;transform:none;}}
+
+  .fri-head{display:flex;align-items:center;gap:12px;padding:16px 14px 16px 18px;color:#fff;background:linear-gradient(100deg,#2F5466 0%,#2E4352 55%,#2A3A48 100%);position:relative;overflow:hidden;}
+  .fri-head::after{content:"";position:absolute;right:-40px;top:-60px;width:180px;height:180px;border-radius:50%;background:radial-gradient(circle,rgba(47,227,206,.25),transparent 65%);pointer-events:none;}
+  .fri-head-av{position:relative;flex-shrink:0;width:52px;height:52px;border-radius:50%;background:#fff;box-shadow:0 0 0 3px rgba(255,255,255,.22),0 6px 14px -6px rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;}
+  .fri-head-av img{width:48px;height:48px;border-radius:50%;object-fit:contain;image-rendering:-webkit-optimize-contrast;}
+  .fri-head-text{flex:1;min-width:0;position:relative;z-index:1;}
+  .fri-head-text strong{display:block;font:700 15px/1.25 'Space Grotesk',Inter,sans-serif;color:#fff;letter-spacing:-.015em;}
+  .fri-icon-btn{position:relative;z-index:1;width:34px;height:34px;display:flex;align-items:center;justify-content:center;cursor:pointer;
+    padding:0 !important;border:0 !important;border-radius:10px !important;background:rgba(255,255,255,.08) !important;color:#fff !important;transition:background .2s ease;}
+  .fri-icon-btn:hover{background:rgba(255,255,255,.18) !important;}
+  .fri-icon-btn svg{width:18px;height:18px;}
+
+  /* ---------- Messages ---------- */
+  .fri-body{flex:1;overflow-y:auto;padding:18px 14px 10px;background:#F7FBFB;display:flex;flex-direction:column;gap:14px;scroll-behavior:smooth;}
+  .fri-body::-webkit-scrollbar{width:6px;} .fri-body::-webkit-scrollbar-thumb{background:#D5E2E1;border-radius:6px;}
+  .fri-row{display:flex;flex-direction:column;align-items:flex-start;max-width:100%;animation:faMsg .3s ease;}
+  .fri-row.fri-user{align-items:flex-end;}
+  @keyframes faMsg{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  .fri-meta{display:flex;align-items:center;gap:7px;margin:0 0 9px;font-size:11.5px;color:var(--fri-muted);}
+  .fri-user .fri-meta{flex-direction:row-reverse;}
+  .fri-meta b{font-weight:700;font-size:13px;color:var(--fri-ink);}
+  .fri-av{flex-shrink:0;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;}
+  .fri-bot .fri-av{background:#fff;border:1.5px solid #D5E2E1;box-shadow:0 4px 10px -6px rgba(11,15,20,.35);}
+  .fri-bot .fri-av img{width:28px;height:28px;border-radius:50%;object-fit:contain;}
+  .fri-user .fri-av{background:linear-gradient(135deg,#2F5466,#2A3A48);color:#fff;}
+  .fri-user .fri-av svg{width:15px;height:15px;}
+  .fri-bub{position:relative;max-width:88%;padding:11px 14px;font-size:14px;line-height:1.55;word-wrap:break-word;overflow-wrap:anywhere;}
+  .fri-bot .fri-bub{background:#fff;border:1px solid var(--fri-border);border-radius:6px 18px 18px 18px;color:var(--fri-text);box-shadow:0 6px 16px -14px rgba(11,15,20,.4);}
+  .fri-user .fri-bub{background:#07A698;color:#fff;border-radius:18px 6px 18px 18px;box-shadow:0 10px 20px -14px rgba(7,166,152,.9);}
+  /* Speech-bubble tails pointing up at the speaker's avatar */
+  .fri-bub::before,.fri-bub::after{content:"";position:absolute;pointer-events:none;clip-path:polygon(50% 0,100% 100%,0 100%);}
+  .fri-bot .fri-bub::before{left:6px;top:-10px;width:16px;height:10px;background:var(--fri-border);}
+  .fri-bot .fri-bub::after{left:7px;top:-8.5px;width:14px;height:9.5px;background:#fff;}
+  .fri-user .fri-bub::before{display:none;}
+  .fri-user .fri-bub::after{right:8px;top:-8px;width:14px;height:9px;background:#07A698;}
+  .fri-err .fri-bub::after{background:#FDF1F0;}
+  .fri-err .fri-bub::before{background:#F4C9C6;}
+  .fri-bub p{margin:0 0 7px !important;font-size:14px !important;color:inherit !important;line-height:1.55 !important;}
+  .fri-bub p:last-child{margin:0 !important;}
+  .fri-bub ol,.fri-bub ul{margin:4px 0 7px 18px !important;padding:0 !important;}
+  .fri-bub li{margin:3px 0;font-size:14px;}
+  .fri-bub sup a{font:700 10px 'JetBrains Mono',monospace;color:var(--fri-pd) !important;background:var(--fri-tint);border-radius:4px;padding:0 4px;text-decoration:none !important;margin-left:1px;}
+  .fri-sources{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;padding-top:10px;border-top:1px dashed var(--fri-border);}
+  .fri-sources a{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:var(--fri-pd) !important;background:var(--fri-tint);
+    border:1px solid rgba(7,166,152,.18);border-radius:999px;padding:4px 10px;text-decoration:none !important;transition:all .2s ease;}
+  .fri-sources a:hover{background:var(--fri-p);color:#fff !important;}
+  .fri-sources a svg{width:11px;height:11px;}
+  .fri-err .fri-bub{background:#FDF1F0;border-color:#F4C9C6;color:#9E3531;}
+  .fri-typing{display:inline-flex;gap:4px;padding:3px 0;}
+  .fri-typing i{width:7px;height:7px;border-radius:50%;background:var(--fri-p);opacity:.35;animation:faDot 1.1s infinite ease-in-out;}
+  .fri-typing i:nth-child(2){animation-delay:.15s}.fri-typing i:nth-child(3){animation-delay:.3s}
+  @keyframes faDot{0%,80%,100%{opacity:.3;transform:translateY(0)}40%{opacity:1;transform:translateY(-4px)}}
+
+  .fri-chips{display:flex;flex-wrap:wrap;gap:7px;padding-left:46px;margin-top:-4px;}
+  .fri-chips button{font-size:12.5px !important;font-weight:600;color:var(--fri-pd) !important;background:#fff !important;border:1px solid #CDEBE6 !important;
+    border-radius:999px !important;padding:7px 12px !important;cursor:pointer;line-height:1.3;transition:all .2s ease;}
+  .fri-chips button:hover{background:var(--fri-tint) !important;border-color:var(--fri-p) !important;transform:translateY(-1px);}
+
+  /* ---------- Verify ---------- */
+  .fri-verify{display:flex;flex-direction:column;align-items:center;gap:5px;padding:10px 14px 4px;background:#F7FBFB;}
+  .fri-verify small{font-size:12px;color:var(--fri-muted);text-align:center;}
+  .fri-verify.is-done{display:none;}
+
+  /* ---------- Footer ---------- */
+  .fri-foot{padding:12px 14px 12px;border-top:1px solid var(--fri-border);background:#fff;}
+  .fri-form{display:flex;align-items:flex-end;gap:8px;padding:5px 5px 5px 16px;border:1.5px solid var(--fri-border);border-radius:24px;background:#fff;transition:border-color .2s ease,box-shadow .2s ease;}
+  .fri-form:focus-within{border-color:var(--fri-p);box-shadow:0 0 0 4px var(--fri-tint);}
+  .fri-form textarea{flex:1;resize:none;max-height:110px;min-height:24px;margin:7px 0 !important;padding:0 !important;font:14px/1.45 Inter,system-ui,sans-serif !important;
+    color:var(--fri-ink) !important;border:0 !important;outline:0 !important;background:transparent !important;box-shadow:none !important;}
+  .fri-form textarea::placeholder{color:#9AA4AD;}
+  .fri-send{flex-shrink:0;width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer;
+    padding:0 !important;border:0 !important;border-radius:50% !important;background:linear-gradient(135deg,#0BB8A8,#058F83) !important;color:#fff !important;transition:transform .15s ease,opacity .2s ease;}
+  .fri-send:hover:not(:disabled){transform:scale(1.07);}
+  .fri-send:disabled,.fri-form textarea:disabled{opacity:.45;cursor:not-allowed;}
+  .fri-send svg{width:18px;height:18px;margin-left:-1px;}
+  .fri-disclaimer{display:flex;align-items:flex-start;gap:8px;margin-top:10px;padding:9px 11px;border-radius:12px;background:#F5F8F9;}
+  .fri-disclaimer svg{flex-shrink:0;width:15px;height:15px;color:var(--fri-p);margin-top:1px;}
+  .fri-disclaimer p{margin:0 !important;font-size:11.5px !important;line-height:1.45 !important;color:var(--fri-muted) !important;}
+  .fri-disclaimer strong{color:#4B565F;font-weight:600;}
+  .fri-disclaimer a{color:var(--fri-pd) !important;font-weight:600;text-decoration:none !important;border-bottom:1px solid rgba(7,166,152,.3);}
+  .fri-disclaimer a:hover{color:var(--fri-gold) !important;border-color:var(--fri-gold);}
+
+  @media (max-width:520px){
+    .fri-root{right:16px;bottom:16px;}
+    .fri-root.is-open{left:0;right:0;bottom:0;}
+    .fri-root.is-open .fri-launch{display:none;}
+    .fri-panel{position:fixed;left:0;right:0;bottom:0;width:100%;height:min(88vh,680px);border-radius:24px 24px 0 0;}
+    .fri-nudge{width:min(250px,calc(100vw - 40px));}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .fri-launch,.fri-panel,.fri-row,.fri-nudge{animation:none !important;transform:none;}
+    .fri-spark,.fri-spark2,.fri-typing i{animation:none !important;}
+  }
+</style>
+
+<script data-no-optimize="1" data-no-defer="1" data-no-delay="1" data-cfasync="false">
+(function start() {
+  if (document.readyState === 'loading' || !document.getElementById('faLaunch')) {
+    if (!start.waiting) { start.waiting = true; document.addEventListener('DOMContentLoaded', start); }
+    return;
+  }
+  if (start.done) return; start.done = true;
+  var cfg = window.FARIID_AI_CONFIG || {};
+  var root = document.getElementById('faLaunch').closest('.fri-root');
+  if (!root) return;
+  if (!cfg.apiUrl) console.warn('Fariid: FARIID_AI_CONFIG with apiUrl is missing. Paste the settings <script> block above the widget.');
+  var $ = function (id) { return document.getElementById(id); };
+  var panel = $('faPanel'), body = $('faBody'), input = $('faInput'), send = $('faSend'), form = $('faForm');
+  var session = null, busy = false, history = [], widgetId = null, scriptLoaded = false, started = false;
+  var NAME = cfg.name || 'Fariid';
+  var USER_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg>';
+  var LINK_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M9 7h8v8"/></svg>';
+  var CHIPS = [['👤', 'Who is Ahmed MC?'], ['🛠️', 'What tools has Ahmed built?'], ['🧭', 'How do I navigate this website?'], ['✉️', 'How can I contact Ahmed?']];
+
+  // Names, subtitle and avatar from the config.
+  $('faName').textContent = cfg.title || (NAME + ' - Personal AI Assistant');
+  if (cfg.privacyUrl) $('faPrivacy').href = cfg.privacyUrl;
+  [].forEach.call(root.querySelectorAll('.fri-avatar-img'), function (img) { setAvatar(img); });
+  function setAvatar(img) {
+    img.alt = NAME;
+    img.src = cfg.avatar || '';
+    img.onerror = function () {
+      if (img.classList.contains('fri-launch-logo')) { root.classList.add('no-logo'); img.remove(); return; }
+      var s = document.createElement('span'); s.textContent = NAME.charAt(0); s.style.cssText = 'font:700 14px Inter,sans-serif;color:#058F83'; img.replaceWith(s);
+    };
+  }
+
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function scroll() { body.scrollTop = body.scrollHeight; }
+  function setReady(on) { input.disabled = !on; send.disabled = !on || busy; if (on && !panel.hidden) input.focus(); }
+  function ago(t) {
+    var s = Math.round((Date.now() - t) / 1000);
+    if (s < 45) return 'Just now';
+    var m = Math.round(s / 60); if (m < 60) return m + ' min ago';
+    return new Date(t).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+  }
+  setInterval(function () { [].forEach.call(body.querySelectorAll('[data-t]'), function (n) { n.textContent = ago(Number(n.getAttribute('data-t'))); }); }, 30000);
+
+  // One chat row: "avatar  Name · time" on one line, then the bubble with its tail pointing at the avatar.
+  function row(who, bubbleContent, extraCls) {
+    var r = el('div', 'fri-row fri-' + who + (extraCls ? ' ' + extraCls : ''));
+    var meta = el('div', 'fri-meta');
+    var av = el('div', 'fri-av');
+    if (who === 'bot') { var img = el('img'); img.width = 28; img.height = 28; img.alt = ''; setAvatar(img); av.appendChild(img); }
+    else { av.innerHTML = USER_ICON; av.setAttribute('aria-hidden', 'true'); }
+    meta.appendChild(av);
+    meta.appendChild(el('b', null, who === 'bot' ? NAME : 'You'));
+    meta.appendChild(document.createTextNode('·'));
+    var time = el('span', null, 'Just now'); time.setAttribute('data-t', String(Date.now())); meta.appendChild(time);
+    var bub = el('div', 'fri-bub');
+    if (typeof bubbleContent === 'string') bub.appendChild(el('p', null, bubbleContent)); else bub.appendChild(bubbleContent);
+    r.appendChild(meta); r.appendChild(bub);
+    body.appendChild(r); scroll();
+    return r;
+  }
+
+  // Answer text → safe DOM: paragraphs, lists, [n] citations and source pills.
+  function answerContent(text, sources) {
+    var frag = document.createDocumentFragment();
+    var byN = {}; (sources || []).forEach(function (s) { byN[s.n] = s; });
+    var list = null, para = [];
+    function flush() { if (para.length) { var p = el('p'); inline(p, para.join(' '), byN); frag.appendChild(p); para = []; } }
+    String(text).split('\n').forEach(function (line) {
+      var t = line.trim(), item = t.match(/^(\d+[.)]|[-*•])\s+(.*)$/);
+      if (!t) { flush(); list = null; return; }
+      if (item) {
+        flush();
+        var ordered = /^\d/.test(item[1]);
+        if (!list || (list.tagName === 'OL') !== ordered) { list = el(ordered ? 'ol' : 'ul'); frag.appendChild(list); }
+        var li = el('li'); inline(li, item[2], byN); list.appendChild(li);
+      } else { list = null; para.push(t); }
+    });
+    flush();
+    if (sources && sources.length) {
+      var src = el('div', 'fri-sources');
+      sources.forEach(function (s) {
+        var a = el('a'); a.href = s.url; a.target = '_blank'; a.rel = 'noopener'; a.title = s.title;
+        a.innerHTML = LINK_ICON; a.appendChild(document.createTextNode(s.title));
+        src.appendChild(a);
+      });
+      frag.appendChild(src);
+    }
+    return frag;
+  }
+  function inline(parent, text, byN) {
+    text.replace(/\*\*(.+?)\*\*/g, '$1').split(/(\[\d+\])/).forEach(function (part) {
+      var m = part.match(/^\[(\d+)\]$/);
+      if (m && byN[m[1]]) {
+        var sup = el('sup'), a = el('a', null, m[1]);
+        a.href = byN[m[1]].url; a.target = '_blank'; a.rel = 'noopener'; a.title = byN[m[1]].title;
+        sup.appendChild(a); parent.appendChild(sup);
+      } else if (!m) parent.appendChild(document.createTextNode(part));
+    });
+  }
+  function showError(msg) { row('bot', msg, 'fri-err'); }
+
+  function welcome() {
+    if (started) return; started = true;
+    row('bot', "Hi! 👋 I'm " + NAME + ", Ahmed MC's AI assistant. I can help with questions about Ahmed, his free tools, and how to find your way around this website.");
+    var chips = el('div', 'fri-chips'); chips.id = 'faChips';
+    CHIPS.forEach(function (c) { var b = el('button', null, c[0] + ' ' + c[1]); b.type = 'button'; b.setAttribute('data-q', c[1]); chips.appendChild(b); });
+    body.appendChild(chips);
+  }
+
+  // Turnstile → 30-minute session.
+  function loadTurnstile(cb) {
+    if (window.turnstile) return cb();
+    if (scriptLoaded) return setTimeout(function () { loadTurnstile(cb); }, 200);
+    scriptLoaded = true;
+    var s = document.createElement('script');
+    s.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+    s.async = true; s.onload = cb;
+    s.onerror = function () { $('faVerifyMsg').textContent = 'The human check could not load. Please refresh the page.'; };
+    document.head.appendChild(s);
+  }
+  function verify() {
+    $('faVerify').classList.remove('is-done');
+    $('faVerifyMsg').textContent = "Quick check that you're human…";
+    setReady(false);
+    loadTurnstile(function () {
+      if (widgetId !== null) { try { window.turnstile.remove(widgetId); } catch (e) {} }
+      widgetId = window.turnstile.render('#faTurnstile', {
+        sitekey: cfg.siteKey, action: 'fariid_ai_assistant', size: 'flexible',
+        callback: function (token) {
+          fetch(cfg.apiUrl + '/api/session', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ token: token }) })
+            .then(function (r) { return r.json().catch(function () { return { error: 'not_json' }; }).then(function (d) { return { ok: r.ok, status: r.status, d: d }; }); })
+            .then(function (r) {
+              if (r.d && r.d.error === 'region_unavailable') {
+                $('faVerifyMsg').textContent = "Sorry, the AI assistant isn't available in your region yet. You can still browse the site or use the contact page.";
+                return;
+              }
+              if (!r.ok || !r.d.session) {
+                var code = ((r.d && r.d.error) || ('http_' + r.status)) + (r.d && r.d.reason ? ': ' + r.d.reason : '');
+                console.warn('Fariid: session failed', r.status, code);
+                $('faVerifyMsg').textContent = 'Verification failed (' + code + '). Close and reopen to try again.';
+                return;
+              }
+              session = r.d.session;
+              $('faVerify').classList.add('is-done');
+              setReady(true);
+            })
+            .catch(function (e) {
+              console.warn('Fariid: could not reach the assistant server', e);
+              $('faVerifyMsg').textContent = 'Verification failed (cannot_reach_server). Close and reopen to try again.';
+            });
+        },
+        'error-callback': function () { $('faVerifyMsg').textContent = 'Verification failed. Close and reopen to try again.'; }
+      });
+    });
+  }
+
+  function ask(question) {
+    question = String(question || '').trim();
+    if (!question || busy) return;
+    if (!session) { verify(); return; }
+    var chips = $('faChips'); if (chips) chips.remove();
+    row('user', question);
+    var t = el('span', 'fri-typing'); t.innerHTML = '<i></i><i></i><i></i>';
+    var typing = row('bot', t); typing.querySelector('.fri-meta').lastChild.textContent = 'typing…';
+    busy = true; setReady(true); input.value = ''; autosize();
+
+    fetch(cfg.apiUrl + '/api/ask', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: 'Bearer ' + session },
+      body: JSON.stringify({ question: question, history: history.slice(-4) })
+    })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return { status: r.status, d: d }; }); })
+      .then(function (r) {
+        typing.remove();
+        if (r.status === 200 && r.d.answer) {
+          row('bot', answerContent(r.d.answer, r.d.sources));
+          history.push({ role: 'user', content: question }, { role: 'assistant', content: r.d.answer });
+        } else if (r.status === 401) {
+          session = null; showError('Your session expired. Please complete the quick check again.'); verify();
+        } else if (r.status === 503 && r.d.error === 'busy') {
+          showError("I'm a bit busy right now. Please try again in a minute.");
+        } else if (r.status === 451) {
+          showError("Sorry, the AI assistant isn't available in your region yet. You can still use the contact page.");
+        } else if (r.status === 429) {
+          showError("You've reached today's question limit. Please come back tomorrow, or use the contact page.");
+        } else {
+          if (r.d && r.d.reason) console.warn('Fariid: assistant error', r.status, r.d.reason);
+          showError('Sorry, I’m unavailable right now. Please try again later.' + (r.d && r.d.reason ? ' (' + r.d.reason + ')' : ''));
+        }
+      })
+      .catch(function () { typing.remove(); showError('Connection problem. Please check your internet and try again.'); })
+      .then(function () { busy = false; setReady(!!session); });
+  }
+
+  function autosize() { input.style.height = 'auto'; input.style.height = Math.min(input.scrollHeight, 110) + 'px'; }
+
+  // Pop-up greeting: shows shortly after each page loads, until the visitor closes it or opens the chat
+  // (then it stays hidden for the rest of their visit).
+  var nudge = $('faNudge'), nudgeTimer;
+  function seen() { try { return sessionStorage.getItem('fariidNudgeDone') === '1'; } catch (e) { return false; } }
+  function markSeen() { try { sessionStorage.setItem('fariidNudgeDone', '1'); } catch (e) {} }
+  function hideNudge(done) { nudge.hidden = true; clearTimeout(nudgeTimer); if (done) markSeen(); }
+  $('faNudgeText').textContent = cfg.greeting || ("👋 Hi! I'm " + NAME + '. Ask me anything.');
+  if (!seen()) {
+    setTimeout(function () {
+      if (!panel.hidden) return;
+      nudge.hidden = false;
+      nudgeTimer = setTimeout(function () { hideNudge(false); }, 15000);
+    }, 1500);
+  }
+  $('faNudgeX').addEventListener('click', function (e) { e.stopPropagation(); hideNudge(true); });
+  nudge.addEventListener('click', function () { hideNudge(true); open(); });
+
+  function open() {
+    hideNudge(true);
+    root.classList.add('is-open'); panel.hidden = false;
+    $('faLaunch').setAttribute('aria-expanded', 'true'); $('faLaunch').setAttribute('aria-label', 'Close chat');
+    welcome();
+    if (!session) verify(); else input.focus();
+  }
+  function close() {
+    root.classList.remove('is-open'); panel.hidden = true;
+    $('faLaunch').setAttribute('aria-expanded', 'false'); $('faLaunch').setAttribute('aria-label', 'Chat with ' + NAME);
+    $('faLaunch').focus();
+  }
+
+  $('faLaunch').addEventListener('click', function () { panel.hidden ? open() : close(); });
+  $('faClose').addEventListener('click', close);
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) close(); });
+  form.addEventListener('submit', function (e) { e.preventDefault(); ask(input.value); });
+  input.addEventListener('keydown', function (e) { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); ask(input.value); } });
+  input.addEventListener('input', autosize);
+  body.addEventListener('click', function (e) {
+    var chip = e.target.closest('.fri-chips button');
+    if (!chip) return;
+    if (session) ask(chip.getAttribute('data-q')); else { input.value = chip.getAttribute('data-q'); }
+  });
+})();
+</script>

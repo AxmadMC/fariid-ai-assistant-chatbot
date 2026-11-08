@@ -1,0 +1,254 @@
+[
+  {
+    "id": "about-1",
+    "title": "About Ahmed MC",
+    "section": "Who is Ahmed MC",
+    "url": "https://ahmedmc.com/#about",
+    "text": "Ahmed MC is the short name of Ahmed Muse Ali, an IT support specialist and web developer based in the United States. His website is ahmedmc.com and his motto is \"Let's make it work.\""
+  },
+  {
+    "id": "about-2",
+    "title": "About Ahmed MC",
+    "section": "Current role and career goal",
+    "url": "https://ahmedmc.com/#about",
+    "text": "Ahmed currently works as a Customs Entry Writer at DHL Express. He is looking for IT support and web development roles."
+  },
+  {
+    "id": "about-3",
+    "title": "About Ahmed MC",
+    "section": "Education and certifications",
+    "url": "https://ahmedmc.com/#about",
+    "text": "Ahmed holds a bachelor's degree in Community Development. He is studying Computer Science at Phoenix College and plans to transfer to Arizona State University (ASU) for Software Engineering. He is also studying AI Engineering through CodePath. He holds the Google IT Support certificate and is preparing for the CompTIA A+ and AWS Certified Cloud Practitioner certifications."
+  },
+  {
+    "id": "about-4",
+    "title": "About Ahmed MC",
+    "section": "IT support experience",
+    "url": "https://ahmedmc.com/#about",
+    "text": "Ahmed has 2+ years of IT support experience as a Technical Support Assistant at a training college and an ICT Teacher Assistant at a high school, both in Nairobi, Kenya. He supported 500+ students, 25+ teachers and 7+ staff members with hardware, software, network and account issues on Windows, macOS and Linux. He handled about 15 tickets a day using Zendesk and a custom ticketing system he built, and he set up and managed Moodle LMS for 950+ users across three schools, including two as a volunteer."
+  },
+  {
+    "id": "about-5",
+    "title": "About Ahmed MC",
+    "section": "Why Ahmed builds free tools",
+    "url": "https://ahmedmc.com/#about",
+    "text": "Ahmed is an open-source enthusiast. He builds tools in his spare time to solve problems he has faced, and he makes them free for everyone to use. His aim is to automate repetitive tasks with AI and practical web tools."
+  },
+  {
+    "id": "contact-1",
+    "title": "Contact",
+    "section": "How to contact Ahmed",
+    "url": "https://ahmedmc.com/contact",
+    "text": "The best way to contact Ahmed MC is through the contact form on the Contact page at ahmedmc.com/contact, or by messaging him on LinkedIn. Email addresses on the site are protected from spam bots and appear only after clicking a \"Show email address\" button."
+  },
+  {
+    "id": "contact-2",
+    "title": "Contact",
+    "section": "Response time",
+    "url": "https://ahmedmc.com/contact",
+    "text": "Ahmed does his best to reply as soon as he can, but replies through the contact form can take up to a week. For a faster reply, message him on LinkedIn."
+  },
+  {
+    "id": "contact-3",
+    "title": "Contact",
+    "section": "Location: where Ahmed is based",
+    "url": "https://ahmedmc.com/contact",
+    "text": "Ahmed is based in the United States."
+  },
+  {
+    "id": "contact-4",
+    "title": "Contact",
+    "section": "Reporting a bug in Antibot Email Shield",
+    "url": "https://ahmedmc.com/contact",
+    "text": "Bugs and security issues in Antibot Email Shield should be reported with the \"Show bug report email\" button in the Support section of the documentation at docs.ahmedmc.com/email-shield. Include what happened, the steps to repeat it, the WordPress and plugin versions, and a screenshot if possible."
+  },
+  {
+    "id": "contact-5",
+    "title": "Contact",
+    "section": "Collaboration",
+    "url": "https://ahmedmc.com/contact",
+    "text": "Ahmed is always glad to connect with people working in web development, IT, AI engineering and open source."
+  },
+  {
+    "id": "docs-1",
+    "title": "Antibot Email Shield documentation",
+    "section": "What Antibot Email Shield does",
+    "url": "https://docs.ahmedmc.com/email-shield/#overview",
+    "text": "Antibot Email Shield protects the email addresses on a WordPress website from spam bots. Instead of showing the email on the page, it shows a \"Show email address\" button. When a real person clicks it and passes a quick Cloudflare Turnstile check, the website double-checks the result with Cloudflare, the email appears as a link, and it hides again after 25 seconds. Setting it up takes about 10 minutes."
+  },
+  {
+    "id": "docs-2",
+    "title": "Antibot Email Shield documentation",
+    "section": "Requirements",
+    "url": "https://docs.ahmedmc.com/email-shield/#requirements",
+    "text": "The plugin needs WordPress 6.0 or newer and PHP 7.4 or newer, a free Cloudflare account (the website does not need to use Cloudflare for anything else), and the email addresses you want to protect."
+  },
+  {
+    "id": "docs-3",
+    "title": "Antibot Email Shield documentation",
+    "section": "Installing the plugin",
+    "url": "https://docs.ahmedmc.com/email-shield/#install",
+    "text": "In the WordPress dashboard go to Plugins, then Add New, then Upload Plugin. Click Choose File, select antibot-email-shield.zip, click Install Now, then Activate. A Settings link appears under the plugin's name on the Plugins page, and the settings are also under Settings, then Antibot Email Shield."
+  },
+  {
+    "id": "docs-4",
+    "title": "Antibot Email Shield documentation",
+    "section": "Creating a Cloudflare account and Turnstile widget",
+    "url": "https://docs.ahmedmc.com/email-shield/#turnstile",
+    "text": "Create a free account at dash.cloudflare.com/sign-up and verify your email. You do not need to add your website to Cloudflare for Turnstile. Then sign in, go to Protect & Connect, then Application security, then Turnstile, and click Add widget. Give it a name, add your domain as a hostname without https:// (also add the www version if your site uses it), choose Managed widget mode, choose No for pre-clearance, and click Create. Cloudflare menus can change, so check Cloudflare's Turnstile documentation if something looks different."
+  },
+  {
+    "id": "docs-5",
+    "title": "Antibot Email Shield documentation",
+    "section": "Getting the Turnstile site key and secret key",
+    "url": "https://docs.ahmedmc.com/email-shield/#turnstile",
+    "text": "After creating the widget, Cloudflare shows a Site Key and a Secret Key, each with a copy button. The Secret Key must be kept private like a password; the Site Key is public and safe to share."
+  },
+  {
+    "id": "docs-6",
+    "title": "Antibot Email Shield documentation",
+    "section": "Adding the Turnstile keys",
+    "url": "https://docs.ahmedmc.com/email-shield/#keys",
+    "text": "In WordPress go to Settings, then Antibot Email Shield. Paste the Site Key into the Turnstile site key box and the Secret Key into the Turnstile secret key box, then click Save Changes. After saving, the secret key box looks empty on purpose to keep the key hidden, but the key is still saved."
+  },
+  {
+    "id": "docs-7",
+    "title": "Antibot Email Shield documentation",
+    "section": "Adding protected emails and ids",
+    "url": "https://docs.ahmedmc.com/email-shield/#emails",
+    "text": "In the Protected emails box, type each email you want to protect, one per line, then click Save Changes. Each email gets an id, which is the part before the @: support@yourdomain.com has the id support. To choose your own id, write the id, a colon, then the email, for example help: support@yourdomain.com. After saving, a Saved list shows each id next to its email."
+  },
+  {
+    "id": "docs-8",
+    "title": "Antibot Email Shield documentation",
+    "section": "Using the shortcode",
+    "url": "https://docs.ahmedmc.com/email-shield/#shortcode",
+    "text": "Add the shortcode [email_shield id=\"support\"] where the email should appear, changing the id to match a saved email (for admin@yourdomain.com use [email_shield id=\"admin\"]). In the WordPress block editor, add a Shortcode block and paste it. In Elementor, add a Shortcode widget and paste it. The shortcode [antibot_email_shield id=\"support\"] always works even if another plugin uses [email_shield], and the older names [protected_email] and [unbotted] still work."
+  },
+  {
+    "id": "docs-9",
+    "title": "Antibot Email Shield documentation",
+    "section": "Customizing the plugin",
+    "url": "https://docs.ahmedmc.com/email-shield/#options",
+    "text": "Optional settings: \"Hide again after\" sets how long the email stays visible (default 25 seconds, 0 keeps it visible); \"Button label\" sets the button text (default \"Show email address\"); \"Rate limit\" sets how many times one visitor can reveal emails in 10 minutes (default 10). To change one button's text, add a label, for example [email_shield id=\"support\" label=\"Email our support team\"]."
+  },
+  {
+    "id": "docs-10",
+    "title": "Antibot Email Shield documentation",
+    "section": "Privacy policy note for the plugin",
+    "url": "https://docs.ahmedmc.com/email-shield/#privacy",
+    "text": "When a visitor clicks the button, Cloudflare Turnstile checks their browser (such as IP address and browser details) to confirm they are human. Site owners should mention Cloudflare Turnstile in their privacy policy; the documentation includes text that can be copied."
+  },
+  {
+    "id": "docs-11",
+    "title": "Antibot Email Shield documentation",
+    "section": "Plugin support and bug reports",
+    "url": "https://docs.ahmedmc.com/email-shield/#support",
+    "text": "Antibot Email Shield is a free plugin developed by Ahmed MC. Report bugs and security issues using the \"Show bug report email\" button in the Support section of the documentation, including what happened, steps to repeat it, WordPress and plugin versions, and a screenshot if possible."
+  },
+  {
+    "id": "projects-1",
+    "title": "Projects",
+    "section": "Projects and tools Ahmed has built",
+    "url": "https://ahmedmc.com/portfolio",
+    "text": "Ahmed's free tools are listed on the Home page under Featured Projects and on the Portfolio page: Fariid (this AI assistant), Antibot Email Shield, and Amaan Inbox (beta)."
+  },
+  {
+    "id": "projects-2",
+    "title": "Projects",
+    "section": "Antibot Email Shield",
+    "url": "https://ahmedmc.com/portfolio",
+    "text": "Antibot Email Shield is a free WordPress plugin that keeps email addresses away from spam bots. The email is never written into the page: visitors click \"Show email address\", pass a quick Cloudflare Turnstile check, and the email appears for a short time before hiding again. Its setup guide is at docs.ahmedmc.com/email-shield."
+  },
+  {
+    "id": "projects-3",
+    "title": "Projects",
+    "section": "Why Ahmed made Antibot Email Shield",
+    "url": "https://ahmedmc.com/portfolio",
+    "text": "Ahmed built it to protect the email addresses on his own website from bots that collect them for spam, without making it harder for real people to contact him. He made it free so other website owners can protect theirs too."
+  },
+  {
+    "id": "projects-4",
+    "title": "Projects",
+    "section": "Fariid - AI Assistant",
+    "url": "https://ahmedmc.com/portfolio",
+    "text": "Fariid is the AI assistant chatbot on ahmedmc.com. It answers questions about Ahmed, his projects and the website using only the site's content, and links to the page each answer comes from. It runs on Cloudflare Workers, uses the Gemini API and retrieval-augmented generation (RAG), and is protected with Cloudflare Turnstile and rate limits."
+  },
+  {
+    "id": "projects-5",
+    "title": "Projects",
+    "section": "Why Ahmed built Fariid, this AI assistant chatbot",
+    "url": "https://ahmedmc.com/portfolio",
+    "text": "Ahmed built Fariid so visitors can find answers quickly without searching through pages, and to show how to build AI tools that are safe and practical. It is designed so others can reuse it on their own websites."
+  },
+  {
+    "id": "projects-6",
+    "title": "Projects",
+    "section": "Amaan Inbox (beta)",
+    "url": "https://ahmedmc.com/portfolio",
+    "text": "Amaan Inbox is a secure WordPress contact-form plugin, currently in beta, with a private inbox in the WordPress dashboard. The form is added with a shortcode and protected with Cloudflare Turnstile, a hidden spam trap and rate limits. Site owners can track every message and reply by email, and visitors' IP addresses are stored only as hashes to protect their data. A download is coming soon."
+  },
+  {
+    "id": "projects-7",
+    "title": "Projects",
+    "section": "Why Ahmed built Amaan Inbox",
+    "url": "https://ahmedmc.com/portfolio",
+    "text": "Most contact forms only forward messages to an email inbox, where they're easy to miss or lose. Ahmed wanted every message kept securely in one place on his site, where he can track and reply to it, while protecting visitors' data."
+  },
+  {
+    "id": "skills-1",
+    "title": "Skills",
+    "section": "Technical skills",
+    "url": "https://ahmedmc.com/#about",
+    "text": "Ahmed's technical skills include PHP, JavaScript, HTML, CSS, Python, Java, SQL, REST APIs, WordPress plugin development, Cloudflare Workers, and the Gemini and Claude APIs."
+  },
+  {
+    "id": "skills-2",
+    "title": "Skills",
+    "section": "IT support tools",
+    "url": "https://ahmedmc.com/#about",
+    "text": "Ahmed works with Zendesk, Microsoft 365 (including Teams), Google Workspace, TeamViewer, GitHub, and advanced Excel such as VLOOKUP, XLOOKUP and PivotTables. He troubleshoots Windows, macOS and Linux."
+  },
+  {
+    "id": "website-1",
+    "title": "Navigating ahmedmc.com",
+    "section": "Why Ahmed created this website (ahmedmc.com)",
+    "url": "https://ahmedmc.com/#about",
+    "text": "Ahmed MC created ahmedmc.com to share the free tools he builds, show his projects, and make it easy to get in touch with him."
+  },
+  {
+    "id": "website-2",
+    "title": "Navigating ahmedmc.com",
+    "section": "Main menu of the website",
+    "url": "https://ahmedmc.com/#menu",
+    "text": "The top menu of ahmedmc.com has: Home (about Ahmed and his featured projects), Portfolio (his free tools, with what each one does and why he built it), Docs (step-by-step guides, starting with Antibot Email Shield), Learn, Blog, and Contact (the contact form at ahmedmc.com/contact)."
+  },
+  {
+    "id": "website-3",
+    "title": "Navigating ahmedmc.com",
+    "section": "Home page",
+    "url": "https://ahmedmc.com/#home",
+    "text": "The Home page introduces Ahmed, shows an About section, Featured Projects (Antibot Email Shield, Fariid and Amaan Inbox), a Let's Connect section with links to LinkedIn, the Portfolio and the Contact page, and a newsletter sign-up for one short email when something new is ready."
+  },
+  {
+    "id": "website-4",
+    "title": "Navigating ahmedmc.com",
+    "section": "Footer links and social media",
+    "url": "https://ahmedmc.com/#footer",
+    "text": "At the bottom of every page there are links to the Terms of Service and the Privacy Policy, plus Ahmed's social profiles: LinkedIn, GitHub, Facebook, Instagram and X."
+  },
+  {
+    "id": "website-5",
+    "title": "Navigating ahmedmc.com",
+    "section": "Finding documentation",
+    "url": "https://ahmedmc.com/#docs",
+    "text": "Documentation for Ahmed's projects is under Docs in the top menu. Guides for each project are on the docs site: Antibot Email Shield at docs.ahmedmc.com/email-shield, the Amaan Inbox contact form at docs.ahmedmc.com/contact-form, and the Fariid AI assistant chatbot at docs.ahmedmc.com/ai-assistant. Each guide walks through installation, setup, settings and support step by step."
+  },
+  {
+    "id": "website-6",
+    "title": "Navigating ahmedmc.com",
+    "section": "About this chat assistant and privacy",
+    "url": "https://ahmedmc.com/#assistant",
+    "text": "Fariid is the AI assistant on ahmedmc.com. Questions typed into the chat, plus up to four earlier messages from the same chat, are sent to Google Gemini to write the answer. The website does not store conversations; the chat disappears when the page is refreshed or closed. Because the assistant uses Google's free Gemini service, Google may use what visitors type to improve its products, and human reviewers may read it, so visitors should not share personal, sensitive or confidential information. To prevent abuse there is a daily question limit, counted with a scrambled (hashed) version of the visitor's IP address that is deleted within two days. The assistant is for adults 18 and over, and it is not available in the European Economic Area, Switzerland or the United Kingdom. AI answers can be wrong and are not professional advice. The Privacy Policy is at ahmedmc.com/privacy and the Terms of Service at ahmedmc.com/terms."
+  }
+]

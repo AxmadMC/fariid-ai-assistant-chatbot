@@ -1,0 +1,16 @@
+name = "fariid-ai-assistant"
+main = "src/worker.js"
+compatibility_date = "2026-10-01"
+
+[vars]
+ALLOWED_ORIGINS = "https://ahmedmc.com,https://www.ahmedmc.com"
+AI_PROVIDER = "gemini"          # "gemini" (free tier) or "claude" (paid)
+MODEL = "gemini-flash-lite-latest" # a Gemini model with a free tier; check ai.google.dev/pricing
+DAILY_LIMIT_PER_VISITOR = "20"
+DAILY_LIMIT_TOTAL = "300"
+
+# Daily limits (recommended). Create with: npx wrangler kv namespace create RATE
+# then paste the id it prints below and remove the # signs.
+# [[kv_namespaces]]
+# binding = "RATE"
+# id = "PASTE-ID-HERE"

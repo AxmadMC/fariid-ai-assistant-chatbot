@@ -1,0 +1,11 @@
+{
+  "name": "fariid-ai-assistant",
+  "version": "0.9.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-knowledge.mjs",
+    "eval": "node scripts/eval-retrieval.mjs",
+    "deploy": "node scripts/build-knowledge.mjs && wrangler deploy"
+  }
+}
